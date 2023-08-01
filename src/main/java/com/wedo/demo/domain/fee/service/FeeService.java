@@ -28,7 +28,9 @@ public class FeeService {
             });
         }
 
-        return entity.getId();
+        return formService.updateForm(entity.getId(), entity, builder -> {
+            builder.setOperator("system");
+        });
     }
 
 }

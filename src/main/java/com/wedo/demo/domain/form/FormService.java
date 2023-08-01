@@ -10,4 +10,5 @@ public interface FormService {
 
     <T> Long createForm(FormType formType, T formContent, Consumer<FormBuilderImpl<T>> builder);
 
+    <T> Long updateForm(Long id, T formContent, Consumer<FormBuilderImpl<T>> consumer);
 }

@@ -1,6 +1,7 @@
 package com.wedo.demo.domain.form.service;
 
 import com.wedo.demo.domain.form.*;
+import com.wedo.demo.domain.form.entity.FormEntity;
 import com.wedo.demo.domain.form.internal.FormContextImpl;
 import com.wedo.demo.domain.form.internal.FormWorkUnit;
 import com.wedo.demo.domain.form.repository.FormRepository;
@@ -45,7 +46,10 @@ public class FormServiceImpl implements FormService {
         String content = workUnit.serializeForm(formType, formContent);
 
         FormBuilderImpl<T> builder = new FormBuilderImpl<>(formType, content, workUnit);
-        consumer.accept(builder);
+
+        if (consumer != null) {
+            consumer.accept(builder);
+        }
 
         Form<T> form = builder.build(getFormContext());
 
@@ -53,4 +57,26 @@ public class FormServiceImpl implements FormService {
     }
 
 
+    @Override
+    @Transactional
+    public <T> Long updateForm(Long id, T formContent, Consumer<FormBuilderImpl<T>> consumer) {
+        FormEntity entity = formRepository.get(id);
+
+        String content = workUnit.serializeForm(entity.getFormType(), formContent);
+
+        FormBuilderImpl<T> builder = new FormBuilderImpl<>(entity.getFormType(), content, workUnit);
+        // those might be updated, just copy value before consume
+        builder.setFormVersion(entity.getFormVersion());
+
+        if (consumer != null) {
+            consumer.accept(builder);
+        }
+
+        // those should stay unchanged, update after consumer
+        builder.setId(id);
+
+        Form<T> form = builder.build(getFormContext());
+
+        return form.save();
+    }
 }
