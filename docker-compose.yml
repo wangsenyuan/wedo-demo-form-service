@@ -35,4 +35,4 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /Users/wangsenyuan/workspace/docker
+      device: /var/deploy/demo
