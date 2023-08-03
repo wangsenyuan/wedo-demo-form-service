@@ -29,6 +29,19 @@ services:
       - postgres-db
     links:
       - postgres-db
+  wedo-front:
+    image: wedo-demo-front:latest
+    network_mode: bridge
+    container_name: wedo-front
+    expose:
+      - 3000
+    ports:
+      - 8030:3000
+    restart: unless-stopped
+    depends_on:
+      - wedo-demo
+    links:
+      - wedo-demo
 volumes:
   postgres-data:
     driver: local

@@ -3,8 +3,6 @@ package com.wedo.demo.controller;
 import com.wedo.demo.domain.fee.entity.FeeEntity;
 import com.wedo.demo.domain.fee.service.FeeService;
 import com.wedo.demo.dto.common.R;
-import com.wedo.demo.util.AccessTokenUtil;
-import demo.WorkflowDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +22,8 @@ public class FeeController {
     }
 
     @PostMapping("/submit")
-    public R<String> submit(@RequestBody FeeEntity fee) {
-        String accessToken = AccessTokenUtil.getToken();
-
-        String result = WorkflowDemo.run(accessToken, fee);
-
-        return R.success(result);
+    public R<Long> submit(@RequestBody FeeEntity fee) {
+        Long id = feeService.submit(fee);
+        return R.success(id);
     }
 }

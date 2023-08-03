@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="process-20230803-1" author="wangsenyuan">
+        <sql>
+
+            create table process_instance
+            (
+                id           serial primary key,
+                process_code text not null,
+                process_key  text,
+                state        text not null,
+                form_values  text,
+                created_at   timestamp default now(),
+                created_by   text,
+                updated_at   timestamp default now(),
+                updated_by   text
+            );
+
+            create unique index udx_prc_ins_key on process_instance (process_key) where process_key is not null;
+
+            create index idx_prc_ins_code on process_instance (process_code);
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
