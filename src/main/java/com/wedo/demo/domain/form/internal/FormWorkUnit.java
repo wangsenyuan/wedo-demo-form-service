@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+@SuppressWarnings("unchecked")
 @Service
 public class FormWorkUnit {
     private ConcurrentMap<FormType, FormSerializer<?>> serializers = new ConcurrentHashMap<>();
