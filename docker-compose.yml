@@ -15,6 +15,18 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=testdb
     restart: unless-stopped
+  redis-db:
+    image: bitnami/redis:latest
+    network_mode: bridge
+    restart: unless-stopped
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_AOF_ENABLED=no
   # APP*****************************************
   wedo-demo:
     image: wedo-demo-form-service:latest
@@ -27,8 +39,10 @@ services:
     restart: unless-stopped
     depends_on:
       - postgres-db
+      - redis-db
     links:
       - postgres-db
+      - redis-db
 #  wedo-front:
 #    image: wedo-demo-front:latest
 #    network_mode: bridge
@@ -48,4 +62,10 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /var/deploy/demo
+      device: /var/deploy/demo/postgres
+  redis-data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /var/deploy/demo/redis
