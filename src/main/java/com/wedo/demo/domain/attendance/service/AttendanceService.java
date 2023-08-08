@@ -23,8 +23,8 @@ public class AttendanceService {
 
     public Long save(AttendanceEntity entity) {
         // TODO need do validation
-        entity.setCreatedAt(new Date());
         if (entity.getId() == null) {
+            entity.setOccurredAt(new Date());
             return formService.createForm(FormType.ATTENDANCE, entity, builder -> {
                 builder.setFormVersion("v1");
                 builder.setOperator("system");

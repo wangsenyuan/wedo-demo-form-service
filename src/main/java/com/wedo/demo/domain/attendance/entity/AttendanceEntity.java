@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class AttendanceEntity {
     private Long id;
-    private Date createdAt;
+    private Date occurredAt;
     private String customer;
 
     private String operator;
 
     private String location;
 
-    private String photoUrl;
+    private String imageUrl;
 
     public Long getId() {
         return id;
@@ -21,12 +21,12 @@ public class AttendanceEntity {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getOccurredAt() {
+        return occurredAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setOccurredAt(Date occurredAt) {
+        this.occurredAt = occurredAt;
     }
 
     public String getCustomer() {
@@ -53,11 +53,11 @@ public class AttendanceEntity {
         this.location = location;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

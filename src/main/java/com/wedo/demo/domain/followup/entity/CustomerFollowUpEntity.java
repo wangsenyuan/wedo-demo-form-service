@@ -9,9 +9,9 @@ public class CustomerFollowUpEntity {
 
     private String operator;
 
-    private Date createdAt;
+    private Date occurredAt;
 
-    private String notes;
+    private String note;
 
     private String audioUrl;
 
@@ -39,20 +39,20 @@ public class CustomerFollowUpEntity {
         this.operator = operator;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getOccurredAt() {
+        return occurredAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setOccurredAt(Date occurredAt) {
+        this.occurredAt = occurredAt;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getNote() {
+        return note;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getAudioUrl() {

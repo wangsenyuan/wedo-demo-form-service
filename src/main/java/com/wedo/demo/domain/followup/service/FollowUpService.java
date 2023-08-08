@@ -22,7 +22,7 @@ public class FollowUpService {
     }
 
     public Long save(CustomerFollowUpEntity entity) {
-        entity.setCreatedAt(new Date());
+        entity.setOccurredAt(new Date());
         if (entity.getId() == null) {
             return formService.createForm(FormType.ATTENDANCE, entity, builder -> {
                 builder.setFormVersion("v1");
