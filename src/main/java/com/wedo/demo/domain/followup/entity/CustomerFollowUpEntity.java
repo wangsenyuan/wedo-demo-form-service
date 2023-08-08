@@ -7,7 +7,7 @@ public class CustomerFollowUpEntity {
 
     private String customer;
 
-    private String follower;
+    private String operator;
 
     private Date createdAt;
 
@@ -31,12 +31,12 @@ public class CustomerFollowUpEntity {
         this.customer = customer;
     }
 
-    public String getFollower() {
-        return follower;
+    public String getOperator() {
+        return operator;
     }
 
-    public void setFollower(String follower) {
-        this.follower = follower;
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 
     public Date getCreatedAt() {

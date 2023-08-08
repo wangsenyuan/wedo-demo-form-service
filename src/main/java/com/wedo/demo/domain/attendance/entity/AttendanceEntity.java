@@ -11,7 +11,7 @@ public class AttendanceEntity {
 
     private String location;
 
-    private String phoneUrl;
+    private String photoUrl;
 
     public Long getId() {
         return id;
@@ -53,11 +53,11 @@ public class AttendanceEntity {
         this.location = location;
     }
 
-    public String getPhoneUrl() {
-        return phoneUrl;
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 
-    public void setPhoneUrl(String phoneUrl) {
-        this.phoneUrl = phoneUrl;
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }
