@@ -1,0 +1,9 @@
+<included>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>
+                ${log.pattern.default}
+            </Pattern>
+        </encoder>
+    </appender>
+</included>

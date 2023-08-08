@@ -56,6 +56,7 @@ public class MessageCenterImpl implements MessageCenter {
         }
         running = true;
         taskExecutor.execute(this::messageLoop);
+        logger.info("message center initialized");
     }
 
     private void prepareJsonMapper() {

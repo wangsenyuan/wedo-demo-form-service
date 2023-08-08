@@ -1,0 +1,33 @@
+<included>
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <File>${log.file.base}</File>
+            <encoder>
+                <Pattern>${log.pattern.default}</Pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${log.file.base}.%d{yyyy-MM-dd}</FileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+        <discardingThreshold >0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <appender name="ICE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <appender name="ICE_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <File>${log.file.ice}</File>
+            <encoder>
+                <Pattern>${log.pattern.default}</Pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <FileNamePattern>${log.file.ice}.%d{yyyy-MM-dd}</FileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+        <discardingThreshold >0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+</included>
