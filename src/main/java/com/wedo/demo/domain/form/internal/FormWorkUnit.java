@@ -1,7 +1,6 @@
 package com.wedo.demo.domain.form.internal;
 
 import com.wedo.demo.domain.form.FormSerializer;
-import com.wedo.demo.domain.form.FormService;
 import com.wedo.demo.domain.form.FormType;
 import com.wedo.demo.domain.form.entity.FormEntity;
 import com.wedo.demo.domain.form.repository.FormRepository;
@@ -17,8 +16,6 @@ public class FormWorkUnit {
     private ConcurrentMap<FormType, FormSerializer<?>> serializers = new ConcurrentHashMap<>();
 
     private FormRepository formRepository;
-
-    private FormService formService;
 
     @Autowired
     public void setFormRepository(FormRepository formRepository) {
