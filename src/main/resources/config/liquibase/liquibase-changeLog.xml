@@ -10,4 +10,8 @@
 
     <include file="classpath:config/liquibase/process/process-init-20230803.xml"
              relativeToChangelogFile="false"/>
+
+    <include file="classpath:config/liquibase/message/message-init-20230809.xml"
+             relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

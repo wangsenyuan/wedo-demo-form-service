@@ -1,11 +1,19 @@
 package com.wedo.demo.domain.message;
 
+import java.util.Date;
+
 public interface Message {
+
+    Long getId();
 
     String getSender();
 
-    String getDestination();
+    String getReceiver();
 
-    String getContent();
+    String getBody();
+
+    MessageState getState();
+
+    Date getCreatedAt();
 
 }

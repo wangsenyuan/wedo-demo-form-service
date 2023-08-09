@@ -20,14 +20,16 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-
         <start-class>com.wedo.demo.Application</start-class>
         <dingtalk-sdk-version>2.0.14</dingtalk-sdk-version>
 
         <postgresql.version>42.6.0</postgresql.version>
-        <liquibase.version>4.22.0</liquibase.version>
+        <liquibase.version>4.23.0</liquibase.version>
         <jackson.version>2.15.2</jackson.version>
+        <guava.version>32.1.2-jre</guava.version>
+
+        <retrofit.version>2.9.0</retrofit.version>
+
     </properties>
     <dependencies>
         <dependency>
@@ -58,6 +60,16 @@
             <artifactId>jedis</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -72,6 +84,13 @@
             <groupId>org.codehaus.janino</groupId>
             <artifactId>janino</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -119,31 +138,44 @@
             <version>${liquibase.version}</version>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>com.fasterxml.jackson.dataformat</groupId>-->
-        <!--            <artifactId>jackson-dataformat-xml</artifactId>-->
-        <!--            <version>${jackson.version}</version>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-scalars</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-jackson</artifactId>
+            <version>${retrofit.version}</version>
+        </dependency>
 
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <includeSystemScope>true</includeSystemScope>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <includeSystemScope>true</includeSystemScope>
                     <fork>true</fork>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

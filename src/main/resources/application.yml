@@ -1,0 +1,13 @@
+wedo:
+  demo:
+    chat:
+      http:
+        endpoint: http://54.179.246.123:8000/
+
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false

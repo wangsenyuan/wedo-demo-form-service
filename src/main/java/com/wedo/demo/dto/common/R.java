@@ -15,7 +15,7 @@ public class R<T> implements Serializable {
 
     private String message;
 
-    private T result;
+    private T data;
 
     private R() {
     }
@@ -23,7 +23,7 @@ public class R<T> implements Serializable {
     public static <T> R<T> success(T result) {
         R<T> item = new R<T>();
         item.success = true;
-        item.result = result;
+        item.data = result;
         item.code = "0";
         item.message = "success";
         return item;
@@ -45,16 +45,13 @@ public class R<T> implements Serializable {
         return item;
     }
 
-    public boolean hasResult() {
-        return result != null;
-    }
 
     public boolean isSuccess() {
         return success;
     }
 
-    public T getResult() {
-        return result;
+    public T getData() {
+        return data;
     }
 
     public String getCode() {
