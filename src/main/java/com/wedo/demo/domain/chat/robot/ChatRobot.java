@@ -50,8 +50,12 @@ public class ChatRobot {
         dto.setSender(message.getSender());
 
         executor.execute(() -> {
-            ChatMessageDto res = askAi(dto);
-            replyMessage(message.getSender(), res);
+            try {
+                ChatMessageDto res = askAi(dto);
+                replyMessage(message.getSender(), res);
+            } catch (Exception ex) {
+                logger.warn("exception happend for message {}", message.getId(), ex);
+            }
         });
 
         // always standby, may stop when stopping?
