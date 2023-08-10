@@ -55,7 +55,7 @@ public class MessageCenterImpl implements MessageCenter {
     }
 
     private static int[] NULL_LOOP_LIMITS = {1000, 100, 10, 1};
-    private static long[] NULL_LOOP_SLEEP_SECONDS = {5, 2, 1, 0};
+    private static long[] NULL_LOOP_SLEEP_SECONDS = {1, 1, 1, 0};
 
     private void messageLoop() {
         int nullLoopTimes = 0;
