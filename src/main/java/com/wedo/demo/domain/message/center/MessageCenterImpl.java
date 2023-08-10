@@ -61,29 +61,33 @@ public class MessageCenterImpl implements MessageCenter {
         int nullLoopTimes = 0;
         long lastRunTime = System.nanoTime();
         while (running) {
-            Set<String> queues = Sets.newHashSet(this.clients.keySet());
-            Message message = messageService.receiveMessage(queues);
-            if (message == null) {
-                nullLoopTimes++;
-                int i = 0;
-                while (i < NULL_LOOP_LIMITS.length && nullLoopTimes < NULL_LOOP_LIMITS[i]) {
-                    i++;
+            try {
+                Set<String> queues = Sets.newHashSet(this.clients.keySet());
+                Message message = messageService.receiveMessage(queues);
+                if (message == null) {
+                    nullLoopTimes++;
+                    int i = 0;
+                    while (i < NULL_LOOP_LIMITS.length && nullLoopTimes < NULL_LOOP_LIMITS[i]) {
+                        i++;
+                    }
+                    sleepThreads(NULL_LOOP_SLEEP_SECONDS[i]);
+                    if (i == 0) {
+                        logger.debug("total {} null messages got", nullLoopTimes);
+                        nullLoopTimes /= 10;
+                    }
+                } else {
+                    nullLoopTimes = 0;
+                    handleMessage(message);
                 }
-                sleepThreads(NULL_LOOP_SLEEP_SECONDS[i]);
-                if (i == 0) {
-                    logger.debug("total {} null messages got", nullLoopTimes);
-                    nullLoopTimes /= 10;
+
+                if (System.nanoTime() - lastRunTime > 10_000_000) {
+                    logger.debug("message loop is active");
                 }
-            } else {
-                nullLoopTimes = 0;
-                handleMessage(message);
-            }
 
-            if (System.nanoTime() - lastRunTime > 10_000_000) {
-                logger.debug("message loop is active");
+                lastRunTime = System.nanoTime();
+            } catch (Exception ex) {
+                logger.error("message loop exception", ex);
             }
-
-            lastRunTime = System.nanoTime();
         }
     }
 

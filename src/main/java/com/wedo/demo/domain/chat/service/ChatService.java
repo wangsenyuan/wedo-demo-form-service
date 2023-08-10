@@ -82,7 +82,7 @@ public class ChatService {
             // add sender
             dto.setSender(message.getSender());
             session.sendMessage(new TextMessage(gson.toJson(dto)));
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.warn("failed to send message {} to {}", message.getId(), session.getId(), e);
         }
     }
