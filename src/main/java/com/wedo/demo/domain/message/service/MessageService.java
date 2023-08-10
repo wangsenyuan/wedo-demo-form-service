@@ -64,10 +64,8 @@ public class MessageService {
     }
 
     @Transactional
-    public Message updateMessageState(Message message, MessageState state) {
-        MessageEntity entity = (MessageEntity) message;
-        entity.setState(state);
-        return this.messageRepository.save(entity);
+    public void updateMessageState(Message message, MessageState state) {
+        this.messageRepository.updateState(message.getId(), state);
     }
 
     private MessageEntity pullMessageFromQueue(String queue) {

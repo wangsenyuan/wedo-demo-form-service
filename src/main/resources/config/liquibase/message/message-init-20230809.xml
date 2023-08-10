@@ -17,5 +17,10 @@
         </sql>
     </changeSet>
 
-
+    <changeSet id="message-20230809-2" author="wangsenyuan">
+        <sql>
+            alter table messages
+                add column updated_at timestamp default now();
+        </sql>
+    </changeSet>
 </databaseChangeLog>

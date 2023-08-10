@@ -3,7 +3,6 @@ package com.wedo.demo.domain.chat.service;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.wedo.demo.domain.chat.dto.ChatMessageDto;
-import com.wedo.demo.domain.chat.dto.EstablishSession;
 import com.wedo.demo.domain.message.ConsumerStatus;
 import com.wedo.demo.domain.message.Message;
 import com.wedo.demo.domain.message.MessageCenter;
@@ -38,33 +37,21 @@ public class ChatService {
 
     public void handleMessage(WebSocketSession session, String message) {
         if (closing) {
+            closeWebSocket(session);
             return;
         }
-        senders.compute(session.getId(), (sid, sender) -> {
-            if (sender == null) {
-                return createSender(session, message);
-            }
-
+        logger.debug("get message {} from {}", message, session.getId());
+        senders.computeIfPresent(session.getId(), (sid, sender) -> {
             sendMessage(sender, message);
-
             return sender;
         });
     }
 
     private void sendMessage(MessageSender sender, String message) {
-        // 需要将message进行转换，按照后端期望的结果进行处理
-        // 并从中提取出receiver信息
-//        sender.send(receiver, body);
         ChatMessageDto dto = gson.fromJson(message, ChatMessageDto.class);
         sender.send(dto.getReceiver(), message);
     }
 
-    private MessageSender createSender(WebSocketSession session, String message) {
-        // 这里期望message是用户身份信息
-        EstablishSession establishSession = gson.fromJson(message, EstablishSession.class);
-        this.sessions.put(establishSession.getUserId(), session);
-        return messageCenter.register(establishSession.getUserId(), this::onReply);
-    }
 
     private ConsumerStatus onReply(Message message) {
         if (closing) {
@@ -101,6 +88,7 @@ public class ChatService {
     }
 
     public void closeSession(WebSocketSession session) {
+        logger.info("{} is closing session", session.getId());
         String userId = null;
         for (Map.Entry<String, WebSocketSession> cur : this.sessions.entrySet()) {
             if (StringUtils.equals(session.getId(), cur.getValue().getId())) {
@@ -109,9 +97,13 @@ public class ChatService {
             }
         }
         if (userId != null) {
+            logger.info("sender for {} is removed", userId);
             this.sessions.remove(userId);
         }
-        this.senders.remove(session.getId());
+        MessageSender sender = this.senders.remove(session.getId());
+        if (sender != null) {
+            sender.stop();
+        }
     }
 
     @PreDestroy
@@ -128,12 +120,19 @@ public class ChatService {
         }
     }
 
-    private void closeWebSocket(WebSocketSession session) {
+    private static void closeWebSocket(WebSocketSession session) {
         try {
             session.close(CloseStatus.SERVICE_RESTARTED);
         } catch (IOException e) {
             logger.warn("close websocket session exception", e);
             // ignore
         }
+    }
+
+    public void join(WebSocketSession session, String userId) {
+        this.sessions.put(userId, session);
+        MessageSender sender = messageCenter.register(userId, this::onReply);
+        this.senders.put(session.getId(), sender);
+        logger.info("{}/{} join chat", session.getId(), userId);
     }
 }

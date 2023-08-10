@@ -4,4 +4,5 @@ public interface MessageSender {
 
     void send(String receiver, String message);
 
+    void stop();
 }

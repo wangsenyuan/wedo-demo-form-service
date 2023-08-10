@@ -49,7 +49,9 @@ public class MessageCenterImpl implements MessageCenter {
             logger.warn("message loop is not started yet, it may not process any message correctly");
         }
         clients.put(mailbox, messageConsumer);
-        return new MessageSenderImpl(mailbox, messageService::sendMessage);
+        return new MessageSenderImpl(mailbox, messageService::sendMessage, () -> {
+            clients.remove(mailbox);
+        });
     }
 
     private static int[] NULL_LOOP_LIMITS = {1000, 100, 10, 1};
@@ -57,6 +59,7 @@ public class MessageCenterImpl implements MessageCenter {
 
     private void messageLoop() {
         int nullLoopTimes = 0;
+        long lastRunTime = System.nanoTime();
         while (running) {
             Set<String> queues = Sets.newHashSet(this.clients.keySet());
             Message message = messageService.receiveMessage(queues);
@@ -75,6 +78,12 @@ public class MessageCenterImpl implements MessageCenter {
                 nullLoopTimes = 0;
                 handleMessage(message);
             }
+
+            if (System.nanoTime() - lastRunTime > 10_000_000) {
+                logger.debug("message loop is active");
+            }
+
+            lastRunTime = System.nanoTime();
         }
     }
 
