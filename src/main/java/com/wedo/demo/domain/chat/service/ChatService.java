@@ -3,6 +3,7 @@ package com.wedo.demo.domain.chat.service;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.wedo.demo.domain.chat.dto.ChatMessageDto;
+import com.wedo.demo.domain.chat.dto.ChatMessageType;
 import com.wedo.demo.domain.message.ConsumerStatus;
 import com.wedo.demo.domain.message.Message;
 import com.wedo.demo.domain.message.MessageCenter;
@@ -18,6 +19,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import javax.annotation.PreDestroy;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -80,11 +82,25 @@ public class ChatService {
         try {
             ChatMessageDto dto = gson.fromJson(message.getBody(), ChatMessageDto.class);
             // add sender
-            dto.setSender(message.getSender());
+            if (dto != null) {
+                dto.setSender(message.getSender());
+            } else {
+                dto = nullMessage(message.getSender());
+            }
             session.sendMessage(new TextMessage(gson.toJson(dto)));
         } catch (Exception e) {
             logger.warn("failed to send message {} to {}", message.getId(), session.getId(), e);
         }
+    }
+
+    private static ChatMessageDto nullMessage(String sender) {
+        ChatMessageDto dto = new ChatMessageDto();
+        dto.setMsgType(ChatMessageType.NULL);
+        Map<String, String> payload = new HashMap<>();
+        payload.put("value", "后台错误，未获取到有效信息");
+        dto.setPayload(payload);
+        dto.setSender(sender);
+        return dto;
     }
 
     public void closeSession(WebSocketSession session) {
