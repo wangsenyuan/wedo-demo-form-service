@@ -1,14 +1,8 @@
-package com.wedo.demo.domain.attendance.entity;
+package com.wedo.demo.dto.attendance;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "attendance_record")
-@Entity
-public class AttendanceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
+public class AttendanceDto {
     private Long id;
     private Date occurredAt;
     private String customer;
@@ -18,8 +12,6 @@ public class AttendanceEntity {
     private String location;
 
     private String imageUrl;
-    private String updatedBy;
-    private String createdBy;
 
     public Long getId() {
         return id;
@@ -67,21 +59,5 @@ public class AttendanceEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
     }
 }

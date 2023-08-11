@@ -17,4 +17,6 @@
     <include file="classpath:config/liquibase/fee/fee-init-20230801.xml"
              relativeToChangelogFile="false"/>
 
+    <include file="classpath:config/liquibase/attendance/attendance-init-20230801.xml"
+             relativeToChangelogFile="false"/>
 </databaseChangeLog>
