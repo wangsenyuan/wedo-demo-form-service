@@ -1,5 +1,7 @@
 package com.wedo.demo.domain.followup.entity;
 
+import com.google.common.base.MoreObjects;
+
 import java.util.Date;
 
 public class CustomerFollowUpEntity {
@@ -61,5 +63,10 @@ public class CustomerFollowUpEntity {
 
     public void setAudioUrl(String audioUrl) {
         this.audioUrl = audioUrl;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("id", id).add("customer", customer).add("operator", operator).add("occurredAt", occurredAt).add("note", note).add("audioUrl", audioUrl).toString();
     }
 }
