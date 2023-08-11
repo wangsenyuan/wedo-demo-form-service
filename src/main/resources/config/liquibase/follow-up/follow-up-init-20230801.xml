@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="follow-up-20230801-1" author="wangsenyuan">
+        <sql>
+            create table customer_follow_up
+            (
+                id          serial primary key,
+                occurred_at timestamp default now(),
+                customer    text,
+                note        text,
+                audio_url   text,
+                created_at  timestamp default now(),
+                created_by  text,
+                updated_at  timestamp default now(),
+                updated_by  text
+            );
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="follow-up-20230801-2" author="wangsenyuan">
+        <sql>
+            alter table customer_follow_up add column operator text;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

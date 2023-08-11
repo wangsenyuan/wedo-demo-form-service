@@ -2,12 +2,6 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <include file="classpath:config/liquibase/book/book-init-20230801.xml"
-             relativeToChangelogFile="false"/>
-
-    <include file="classpath:config/liquibase/form/form-init-20230801.xml"
-             relativeToChangelogFile="false"/>
-
     <include file="classpath:config/liquibase/process/process-init-20230803.xml"
              relativeToChangelogFile="false"/>
 
@@ -19,4 +13,8 @@
 
     <include file="classpath:config/liquibase/attendance/attendance-init-20230801.xml"
              relativeToChangelogFile="false"/>
+
+    <include file="classpath:config/liquibase/follow-up/follow-up-init-20230801.xml"
+             relativeToChangelogFile="false"/>
+
 </databaseChangeLog>

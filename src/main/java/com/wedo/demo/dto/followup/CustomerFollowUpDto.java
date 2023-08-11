@@ -1,16 +1,9 @@
-package com.wedo.demo.domain.followup.entity;
+package com.wedo.demo.dto.followup;
 
-import com.google.common.base.MoreObjects;
-
-import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "customer_follow_up")
-@Entity
-public class CustomerFollowUpEntity {
-    @Id
-    @Column(columnDefinition = "serial")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerFollowUpDto {
+
     private Long id;
 
     private String customer;
@@ -22,8 +15,6 @@ public class CustomerFollowUpEntity {
     private String note;
 
     private String audioUrl;
-    private String updatedBy;
-    private String createdBy;
 
     public Long getId() {
         return id;
@@ -71,26 +62,5 @@ public class CustomerFollowUpEntity {
 
     public void setAudioUrl(String audioUrl) {
         this.audioUrl = audioUrl;
-    }
-
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).add("id", id).add("customer", customer).add("operator", operator).add("occurredAt", occurredAt).add("note", note).add("audioUrl", audioUrl).toString();
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
     }
 }

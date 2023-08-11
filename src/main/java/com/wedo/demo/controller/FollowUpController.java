@@ -1,8 +1,10 @@
 package com.wedo.demo.controller;
 
-import com.wedo.demo.domain.followup.entity.CustomerFollowUpEntity;
-import com.wedo.demo.domain.followup.service.FollowUpService;
+import com.wedo.demo.domain.followup.CustomerFollowUp;
+import com.wedo.demo.domain.followup.CustomerFollowUpContext;
+import com.wedo.demo.domain.followup.service.CustomerFollowUpServiceImpl;
 import com.wedo.demo.dto.common.R;
+import com.wedo.demo.dto.followup.CustomerFollowUpDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,19 @@ public class FollowUpController {
     private static final Logger logger = LoggerFactory.getLogger(FollowUpController.class);
 
     @Autowired
-    private FollowUpService followUpService;
+    private CustomerFollowUpServiceImpl followUpService;
 
     @PostMapping("/save")
-    public R<Long> save(@RequestBody CustomerFollowUpEntity entity) {
-        logger.debug("follow-up save {}", entity);
-        Long id = followUpService.save(entity);
+    public R<Long> save(@RequestBody CustomerFollowUpDto dto) {
+        Long id = followUpService.factory(CustomerFollowUpContext.current(), dto.getId(), builder -> {
+
+            builder.audioUrl(dto.getAudioUrl());
+            builder.note(dto.getNote());
+            builder.customer(dto.getCustomer());
+            builder.occurredAt(dto.getOccurredAt());
+            builder.operator(dto.getOperator());
+
+        }, CustomerFollowUp::getId);
         return R.success(id);
     }
 }
