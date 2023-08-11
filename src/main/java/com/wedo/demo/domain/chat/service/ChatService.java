@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -95,6 +96,7 @@ public class ChatService {
 
     private static ChatMessageDto nullMessage(String sender) {
         ChatMessageDto dto = new ChatMessageDto();
+        dto.setId(UUID.randomUUID().toString());
         dto.setMsgType(ChatMessageType.NULL);
         Map<String, String> payload = new HashMap<>();
         payload.put("value", "后台错误，未获取到有效信息");
