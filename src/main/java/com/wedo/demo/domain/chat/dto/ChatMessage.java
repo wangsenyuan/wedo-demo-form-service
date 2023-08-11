@@ -5,7 +5,7 @@ import com.google.common.base.MoreObjects;
 import java.util.Date;
 import java.util.Map;
 
-public class ChatMessageDto {
+public class ChatMessage {
     private String id;
 
     private String receiver;

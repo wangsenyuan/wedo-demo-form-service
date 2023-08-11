@@ -2,7 +2,7 @@ package com.wedo.demo.domain.chat.service;
 
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
-import com.wedo.demo.domain.chat.dto.ChatMessageDto;
+import com.wedo.demo.domain.chat.dto.ChatMessage;
 import com.wedo.demo.domain.chat.dto.ChatMessageType;
 import com.wedo.demo.domain.message.ConsumerStatus;
 import com.wedo.demo.domain.message.Message;
@@ -51,7 +51,7 @@ public class ChatService {
     }
 
     private void sendMessage(MessageSender sender, String message) {
-        ChatMessageDto dto = gson.fromJson(message, ChatMessageDto.class);
+        ChatMessage dto = gson.fromJson(message, ChatMessage.class);
         sender.send(dto.getReceiver(), message);
     }
 
@@ -81,7 +81,7 @@ public class ChatService {
 
     private void sendMessageToSession(WebSocketSession session, Message message) {
         try {
-            ChatMessageDto dto = gson.fromJson(message.getBody(), ChatMessageDto.class);
+            ChatMessage dto = gson.fromJson(message.getBody(), ChatMessage.class);
             // add sender
             if (dto != null) {
                 dto.setSender(message.getSender());
@@ -94,8 +94,8 @@ public class ChatService {
         }
     }
 
-    private static ChatMessageDto nullMessage(String sender) {
-        ChatMessageDto dto = new ChatMessageDto();
+    private static ChatMessage nullMessage(String sender) {
+        ChatMessage dto = new ChatMessage();
         dto.setId(UUID.randomUUID().toString());
         dto.setMsgType(ChatMessageType.NULL);
         Map<String, String> payload = new HashMap<>();

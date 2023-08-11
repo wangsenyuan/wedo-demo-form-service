@@ -1,4 +1,4 @@
-package com.wedo.demo.domain.chat.adapter;
+package com.wedo.demo.domain.chat.robot.adapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wedo.demo.config.chat.ChatClientHttpProperty;

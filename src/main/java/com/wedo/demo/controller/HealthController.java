@@ -1,6 +1,6 @@
 package com.wedo.demo.controller;
 
-import com.wedo.demo.domain.chat.dto.ChatMessageDto;
+import com.wedo.demo.domain.chat.dto.ChatMessage;
 import com.wedo.demo.domain.chat.dto.ChatMessageType;
 import com.wedo.demo.domain.chat.robot.ChatRobot;
 import com.wedo.demo.dto.common.R;
@@ -39,8 +39,8 @@ public class HealthController {
     }
 
     @GetMapping("/ai-test")
-    public R<ChatMessageDto> aiTest() {
-        ChatMessageDto dto = new ChatMessageDto();
+    public R<ChatMessage> aiTest() {
+        ChatMessage dto = new ChatMessage();
         dto.setSender("xxx");
         dto.setId("1");
         dto.setReceiver("ai.chat.bot");
