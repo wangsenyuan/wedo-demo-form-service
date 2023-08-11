@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 @Service
 public class FormServiceImpl implements FormService {
@@ -78,5 +79,22 @@ public class FormServiceImpl implements FormService {
         Form<T> form = builder.build(getFormContext());
 
         return form.save();
+    }
+
+    @Override
+    public <T> T getForm(Long id, Function<Form<T>, T> fn) {
+        FormEntity entity = formRepository.get(id);
+        if (entity == null) {
+            return fn.apply(null);
+        }
+        String content = workUnit.serializeForm(entity.getFormType(), entity.getFormContent());
+
+        FormBuilderImpl<T> builder = new FormBuilderImpl<>(entity.getFormType(), content, workUnit);
+        // those might be updated, just copy value before consume
+        builder.setFormVersion(entity.getFormVersion());
+        builder.setId(id);
+        Form<T> form = builder.build(getFormContext());
+
+        return fn.apply(form);
     }
 }

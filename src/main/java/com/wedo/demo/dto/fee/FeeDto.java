@@ -1,15 +1,12 @@
-package com.wedo.demo.domain.fee.entity;
+package com.wedo.demo.dto.fee;
 
-import javax.persistence.*;
+import com.wedo.demo.domain.fee.Fee;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Table(name = "fee_record")
-@Entity
-public class FeeEntity {
-    @Id
-    @Column(columnDefinition = "serial")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FeeDto {
+
     private Long id;
 
     private String reason;
@@ -26,9 +23,20 @@ public class FeeEntity {
 
     private String location;
 
-    private String createdBy;
+    public FeeDto() {
 
-    private String updatedBy;
+    }
+
+    public FeeDto(Fee fee) {
+        this.id = fee.getId();
+        this.reason = fee.getReason();
+        this.amount = fee.getAmount();
+        this.type = fee.getType();
+        this.location = fee.getLocation();
+        this.departure = fee.getDeparture();
+        this.destination = fee.getDestination();
+        this.occurredAt = fee.getOccurredAt();
+    }
 
     public Long getId() {
         return id;
@@ -92,21 +100,5 @@ public class FeeEntity {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
     }
 }

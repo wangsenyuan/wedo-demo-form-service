@@ -14,4 +14,7 @@
     <include file="classpath:config/liquibase/message/message-init-20230809.xml"
              relativeToChangelogFile="false"/>
 
+    <include file="classpath:config/liquibase/fee/fee-init-20230801.xml"
+             relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
