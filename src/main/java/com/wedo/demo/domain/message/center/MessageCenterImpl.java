@@ -55,7 +55,7 @@ public class MessageCenterImpl implements MessageCenter {
     }
 
     private static int[] NULL_LOOP_LIMITS = {1000, 100, 10, 1};
-    private static long[] NULL_LOOP_SLEEP_SECONDS = {1, 1, 1, 0};
+    private static long[] NULL_LOOP_SLEEP_SECONDS = {3, 2, 1, 0};
 
     private void messageLoop() {
         int nullLoopTimes = 0;
@@ -108,7 +108,7 @@ public class MessageCenterImpl implements MessageCenter {
 
     private void sleepThreads(long sleepSeconds) {
         try {
-            Thread.sleep(sleepSeconds * 1000);
+            Thread.sleep(Math.max(sleepSeconds * 1000, 100));
         } catch (InterruptedException e) {
             logger.warn("thread sleeping interrupted", e);
             // ignore
