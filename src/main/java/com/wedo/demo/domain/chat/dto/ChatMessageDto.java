@@ -15,7 +15,7 @@ public class ChatMessageDto {
     private Date createdAt;
 
     private String replyToId;
-    private ChatMessageType msgType;
+    private ChatMessageType msgType = ChatMessageType.TEXT;
 
     private Map<String, String> payload;
 
