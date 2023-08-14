@@ -1,5 +1,7 @@
 package com.wedo.demo.dto.followup;
 
+import com.wedo.demo.domain.followup.CustomerFollowUp;
+
 import java.util.Date;
 
 public class CustomerFollowUpDto {
@@ -15,6 +17,21 @@ public class CustomerFollowUpDto {
     private String note;
 
     private String audioUrl;
+
+    private String formType = "FOLLOW_UP";
+
+    public CustomerFollowUpDto() {
+
+    }
+
+    public CustomerFollowUpDto(CustomerFollowUp domain) {
+        this.id = domain.getId();
+        this.customer = domain.getCustomer();
+        this.occurredAt = domain.getOccurredAt();
+        this.note = domain.getNote();
+        this.audioUrl = domain.getAudioUrl();
+        this.operator = domain.getOperator();
+    }
 
     public Long getId() {
         return id;
@@ -62,5 +79,13 @@ public class CustomerFollowUpDto {
 
     public void setAudioUrl(String audioUrl) {
         this.audioUrl = audioUrl;
+    }
+
+    public String getFormType() {
+        return formType;
+    }
+
+    public void setFormType(String formType) {
+        this.formType = formType;
     }
 }

@@ -1,6 +1,5 @@
 package com.wedo.demo.controller;
 
-import com.wedo.demo.domain.attendance.Attendance;
 import com.wedo.demo.domain.attendance.AttendanceContext;
 import com.wedo.demo.domain.attendance.service.AttendanceServiceImpl;
 import com.wedo.demo.dto.attendance.AttendanceDto;
@@ -19,15 +18,15 @@ public class AttendanceController {
     private AttendanceServiceImpl attendanceService;
 
     @PostMapping("/save")
-    public R<Long> save(@RequestBody AttendanceDto dto) {
-        Long id = attendanceService.factory(AttendanceContext.current(), dto.getId(), builder -> {
+    public R<AttendanceDto> save(@RequestBody AttendanceDto dto) {
+        AttendanceDto res = attendanceService.factory(AttendanceContext.current(), dto.getId(), builder -> {
             builder.setCustomer(dto.getCustomer());
             builder.setLocation(dto.getLocation());
             builder.setImageUrl(dto.getImageUrl());
             builder.setOccurredAt(dto.getOccurredAt());
             builder.setOperator(dto.getOperator());
-        }, Attendance::getId);
+        }, AttendanceDto::new);
 
-        return R.success(id);
+        return R.success(res);
     }
 }

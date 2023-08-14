@@ -23,8 +23,8 @@ public class FeeController {
     }
 
     @PostMapping("/save")
-    public R<Long> save(@RequestBody FeeDto dto) {
-        Long id = feeService.factory(FeeContext.current(), dto.getId(), builder -> {
+    public R<FeeDto> save(@RequestBody FeeDto dto) {
+        FeeDto res = feeService.factory(FeeContext.current(), dto.getId(), builder -> {
             builder.setAmount(dto.getAmount());
             builder.setDeparture(dto.getDeparture());
             builder.setDestination(dto.getDestination());
@@ -32,8 +32,8 @@ public class FeeController {
             builder.setReason(dto.getReason());
             builder.setType(dto.getType());
             builder.setOccurredAt(dto.getOccurredAt());
-        }, Fee::getId);
-        return R.success(id);
+        }, FeeDto::new);
+        return R.success(res);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.wedo.demo.dto.attendance;
 
+import com.wedo.demo.domain.attendance.Attendance;
+
 import java.util.Date;
 
 public class AttendanceDto {
@@ -12,6 +14,21 @@ public class AttendanceDto {
     private String location;
 
     private String imageUrl;
+
+    private String formType = "ATTENDANCE";
+
+    public AttendanceDto() {
+
+    }
+
+    public AttendanceDto(Attendance domain) {
+        this.id = domain.getId();
+        this.occurredAt = domain.getOccurredAt();
+        this.customer = domain.getCustomer();
+        this.operator = domain.getOperator();
+        this.location = domain.getLocation();
+        this.imageUrl = domain.getImageUrl();
+    }
 
     public Long getId() {
         return id;
@@ -59,5 +76,13 @@ public class AttendanceDto {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getFormType() {
+        return formType;
+    }
+
+    public void setFormType(String formType) {
+        this.formType = formType;
     }
 }

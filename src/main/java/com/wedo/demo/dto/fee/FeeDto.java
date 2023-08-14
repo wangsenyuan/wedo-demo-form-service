@@ -11,6 +11,7 @@ public class FeeDto {
 
     private String reason;
 
+    private String formType = "FEE";
     private String type;
 
     private BigDecimal amount;
@@ -100,5 +101,13 @@ public class FeeDto {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getFormType() {
+        return formType;
+    }
+
+    public void setFormType(String formType) {
+        this.formType = formType;
     }
 }

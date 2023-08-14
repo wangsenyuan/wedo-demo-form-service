@@ -1,8 +1,8 @@
 package com.wedo.demo.domain.chat.robot;
 
 import com.google.gson.Gson;
-import com.wedo.demo.domain.chat.robot.adapter.ChatApi;
 import com.wedo.demo.domain.chat.dto.ChatMessage;
+import com.wedo.demo.domain.chat.robot.adapter.ChatApi;
 import com.wedo.demo.domain.message.ConsumerStatus;
 import com.wedo.demo.domain.message.Message;
 import com.wedo.demo.domain.message.MessageCenter;
@@ -52,6 +52,7 @@ public class ChatRobot {
         executor.execute(() -> {
             try {
                 ChatMessage res = askAi(dto);
+
                 replyMessage(message.getSender(), res);
             } catch (Exception ex) {
                 logger.warn("exception happend for message {}", message.getId(), ex);

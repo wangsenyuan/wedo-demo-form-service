@@ -1,6 +1,5 @@
 package com.wedo.demo.controller;
 
-import com.wedo.demo.domain.followup.CustomerFollowUp;
 import com.wedo.demo.domain.followup.CustomerFollowUpContext;
 import com.wedo.demo.domain.followup.service.CustomerFollowUpServiceImpl;
 import com.wedo.demo.dto.common.R;
@@ -22,8 +21,8 @@ public class FollowUpController {
     private CustomerFollowUpServiceImpl followUpService;
 
     @PostMapping("/save")
-    public R<Long> save(@RequestBody CustomerFollowUpDto dto) {
-        Long id = followUpService.factory(CustomerFollowUpContext.current(), dto.getId(), builder -> {
+    public R<CustomerFollowUpDto> save(@RequestBody CustomerFollowUpDto dto) {
+        CustomerFollowUpDto res = followUpService.factory(CustomerFollowUpContext.current(), dto.getId(), builder -> {
 
             builder.audioUrl(dto.getAudioUrl());
             builder.note(dto.getNote());
@@ -31,7 +30,8 @@ public class FollowUpController {
             builder.occurredAt(dto.getOccurredAt());
             builder.operator(dto.getOperator());
 
-        }, CustomerFollowUp::getId);
-        return R.success(id);
+        }, CustomerFollowUpDto::new);
+
+        return R.success(res);
     }
 }
