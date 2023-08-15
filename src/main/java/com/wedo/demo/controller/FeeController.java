@@ -32,6 +32,7 @@ public class FeeController {
             builder.setReason(dto.getReason());
             builder.setType(dto.getType());
             builder.setOccurredAt(dto.getOccurredAt());
+            builder.setTypeName(dto.getTypeName());
         }, FeeDto::new);
         return R.success(res);
     }

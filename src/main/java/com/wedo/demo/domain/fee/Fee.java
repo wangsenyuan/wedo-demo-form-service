@@ -10,6 +10,8 @@ public interface Fee {
 
     String getType();
 
+    String getTypeName();
+
     BigDecimal getAmount();
 
     Date getOccurredAt();
@@ -36,5 +38,7 @@ public interface Fee {
         Builder setDestination(String destination);
 
         Builder setLocation(String location);
+
+        Builder setTypeName(String typeName);
     }
 }

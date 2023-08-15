@@ -32,6 +32,11 @@ public class FeeImpl implements Fee {
     }
 
     @Override
+    public String getTypeName() {
+        return this.entity.getTypeName();
+    }
+
+    @Override
     public BigDecimal getAmount() {
         return this.entity.getAmount();
     }

@@ -15,6 +15,8 @@ public class FeeDto {
     private String formType = "FEE";
     private String type;
 
+    private String typeName;
+
     private BigDecimal amount;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -39,6 +41,7 @@ public class FeeDto {
         this.departure = fee.getDeparture();
         this.destination = fee.getDestination();
         this.occurredAt = fee.getOccurredAt();
+        this.typeName = fee.getTypeName();
     }
 
     public Long getId() {
@@ -111,5 +114,13 @@ public class FeeDto {
 
     public void setFormType(String formType) {
         this.formType = formType;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

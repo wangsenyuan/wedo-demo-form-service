@@ -28,5 +28,10 @@
     </changeSet>
 
 
-
+    <changeSet id="form-20230801-3" author="wangsenyuan">
+        <sql>
+            alter table fee_record
+                add column type_name text;
+        </sql>
+    </changeSet>
 </databaseChangeLog>

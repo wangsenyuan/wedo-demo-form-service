@@ -29,6 +29,7 @@ public class FeeEntity {
     private String createdBy;
 
     private String updatedBy;
+    private String typeName;
 
     public Long getId() {
         return id;
@@ -108,5 +109,13 @@ public class FeeEntity {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

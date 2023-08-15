@@ -55,4 +55,10 @@ public class FeeBuilderImpl implements Fee.Builder {
         this.entity.setLocation(location);
         return this;
     }
+
+    @Override
+    public Fee.Builder setTypeName(String typeName) {
+        this.entity.setType(typeName);
+        return this;
+    }
 }
