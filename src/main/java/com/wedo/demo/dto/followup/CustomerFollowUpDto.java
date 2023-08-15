@@ -1,5 +1,6 @@
 package com.wedo.demo.dto.followup;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wedo.demo.domain.followup.CustomerFollowUp;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ public class CustomerFollowUpDto {
 
     private String operator;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date occurredAt;
 
     private String note;

@@ -1,11 +1,14 @@
 package com.wedo.demo.dto.attendance;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wedo.demo.domain.attendance.Attendance;
 
 import java.util.Date;
 
 public class AttendanceDto {
     private Long id;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date occurredAt;
     private String customer;
 

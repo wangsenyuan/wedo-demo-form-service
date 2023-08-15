@@ -1,5 +1,6 @@
 package com.wedo.demo.dto.fee;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wedo.demo.domain.fee.Fee;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ public class FeeDto {
 
     private BigDecimal amount;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date occurredAt;
 
     private String departure;
