@@ -58,7 +58,7 @@ public class FeeBuilderImpl implements Fee.Builder {
 
     @Override
     public Fee.Builder setTypeName(String typeName) {
-        this.entity.setType(typeName);
+        this.entity.setTypeName(typeName);
         return this;
     }
 }
