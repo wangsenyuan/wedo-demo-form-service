@@ -19,6 +19,8 @@ public class FeeDto {
 
     private BigDecimal amount;
 
+    private String processKey;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date occurredAt;
 
@@ -42,6 +44,7 @@ public class FeeDto {
         this.destination = fee.getDestination();
         this.occurredAt = fee.getOccurredAt();
         this.typeName = fee.getTypeName();
+        this.processKey = fee.getProcessKey();
     }
 
     public Long getId() {
@@ -122,5 +125,13 @@ public class FeeDto {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public String getProcessKey() {
+        return processKey;
+    }
+
+    public void setProcessKey(String processKey) {
+        this.processKey = processKey;
     }
 }
