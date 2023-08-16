@@ -35,6 +35,7 @@ public class ProcessWorkUnit {
     public Long save(Context context, ProcessInstanceEntity entity) {
         entity.setCreatedBy(context.getOperator());
         entity.setUpdatedBy(context.getOperator());
+        entity.setState(ProcessState.NEW);
         this.repository.saveAndFlush(entity);
         return entity.getId();
     }
