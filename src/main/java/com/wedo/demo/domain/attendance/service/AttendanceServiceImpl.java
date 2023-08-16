@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -28,7 +29,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     @Transactional
     public <T> T factory(AttendanceContext context, Long id, Consumer<Attendance.Builder> updater, Function<Attendance, T> fn) {
         AttendanceEntity entity = new AttendanceEntity();
-
+        entity.setOccurredAt(new Date());
         if (id != null) {
             var opt = attendanceRepository.findById(id);
             if (opt.isPresent()) {

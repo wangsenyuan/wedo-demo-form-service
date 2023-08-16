@@ -23,7 +23,7 @@ public class AttendanceController {
             builder.setCustomer(dto.getCustomer());
             builder.setLocation(dto.getLocation());
             builder.setImageUrl(dto.getImageUrl());
-            builder.setOccurredAt(dto.getOccurredAt());
+//            builder.setOccurredAt(dto.getOccurredAt());
             builder.setOperator(dto.getOperator());
         }, AttendanceDto::new);
 

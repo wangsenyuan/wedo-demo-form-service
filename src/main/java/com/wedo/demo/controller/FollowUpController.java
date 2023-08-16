@@ -27,7 +27,7 @@ public class FollowUpController {
             builder.audioUrl(dto.getAudioUrl());
             builder.note(dto.getNote());
             builder.customer(dto.getCustomer());
-            builder.occurredAt(dto.getOccurredAt());
+//            builder.occurredAt(dto.getOccurredAt());
             builder.operator(dto.getOperator());
 
         }, CustomerFollowUpDto::new);

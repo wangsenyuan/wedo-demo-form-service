@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -26,7 +27,7 @@ public class CustomerFollowUpServiceImpl implements CustomerFollowUpService {
     @Transactional
     public <T> T factory(CustomerFollowUpContext context, Long id, Consumer<CustomerFollowUp.Builder> updater, Function<CustomerFollowUp, T> fn) {
         CustomerFollowUpEntity entity = new CustomerFollowUpEntity();
-
+        entity.setOccurredAt(new Date());
         if (id != null) {
             var opt = repository.findById(id);
             if (opt.isPresent()) {
