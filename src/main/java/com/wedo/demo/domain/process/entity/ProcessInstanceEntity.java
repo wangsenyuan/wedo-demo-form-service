@@ -2,20 +2,29 @@ package com.wedo.demo.domain.process.entity;
 
 import com.wedo.demo.domain.process.ProcessState;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Table(name = "process_instance")
+@Entity
 public class ProcessInstanceEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String processCode;
     private String processKey;
+    @Enumerated(EnumType.STRING)
     private ProcessState state;
 
     private String createdBy;
 
     private String updatedBy;
 
-    private Map<String, String> formValues = new HashMap<>();
+    @ElementCollection(targetClass = ProcessInstanceFieldValue.class)
+    @JoinTable(name = "process_instance_field_value")
+    @JoinColumn(name = "process_instance_id", referencedColumnName = "id", columnDefinition = "big_int")
+    private List<ProcessInstanceFieldValue> fieldValues;
 
     public Long getId() {
         return id;
@@ -65,20 +74,21 @@ public class ProcessInstanceEntity {
         this.updatedBy = updatedBy;
     }
 
-    public Map<String, String> getFormValues() {
-        return formValues;
+    public List<ProcessInstanceFieldValue> getFieldValues() {
+        return fieldValues;
     }
 
-    public void setFormValues(Map<String, String> formValues) {
-        this.formValues = formValues;
+    public void setFieldValues(List<ProcessInstanceFieldValue> fieldValues) {
+        this.fieldValues = fieldValues;
     }
 
-    public void copyValue(ProcessInstanceEntity from) {
-        if (from.getState() != null) {
-            this.state = from.getState();
+    public void addFieldValue(String field, String value) {
+        if (this.fieldValues == null) {
+            this.fieldValues = new ArrayList<>();
         }
-        if (from.getProcessKey() != null) {
-            this.processKey = from.getProcessKey();
-        }
+        ProcessInstanceFieldValue fieldValue = new ProcessInstanceFieldValue();
+        fieldValue.setFieldName(field);
+        fieldValue.setFieldValue(value);
+        this.fieldValues.add(fieldValue);
     }
 }

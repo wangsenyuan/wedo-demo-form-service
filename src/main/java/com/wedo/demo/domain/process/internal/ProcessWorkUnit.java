@@ -1,5 +1,6 @@
 package com.wedo.demo.domain.process.internal;
 
+import com.wedo.demo.domain.Context;
 import com.wedo.demo.domain.process.ProcessState;
 import com.wedo.demo.domain.process.adapter.DingtalkProcessServiceAdapter;
 import com.wedo.demo.domain.process.entity.ProcessInstanceEntity;
@@ -16,9 +17,7 @@ public class ProcessWorkUnit {
     @Autowired
     private DingtalkProcessServiceAdapter dingtalkProcessServiceAdapter;
 
-    public String submit(ProcessInstanceEntity entity) {
-        repository.save(entity);
-
+    public String submit(Context context, ProcessInstanceEntity entity) {
         if (StringUtils.isNotEmpty(entity.getProcessKey())) {
             dingtalkProcessServiceAdapter.terminateIfAny(entity.getProcessKey());
         }
@@ -28,8 +27,15 @@ public class ProcessWorkUnit {
         entity.setProcessKey(key);
         entity.setState(ProcessState.SUBMITTED);
 
-        repository.save(entity);
+        repository.updateProcess(entity);
 
         return key;
+    }
+
+    public Long save(Context context, ProcessInstanceEntity entity) {
+        entity.setCreatedBy(context.getOperator());
+        entity.setUpdatedBy(context.getOperator());
+        this.repository.saveAndFlush(entity);
+        return entity.getId();
     }
 }

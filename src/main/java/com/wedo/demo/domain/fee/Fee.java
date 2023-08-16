@@ -24,6 +24,8 @@ public interface Fee {
 
     Long save(FeeContext context);
 
+    void updateProcess(FeeContext context, String processKey);
+
     interface Builder {
         Builder setReason(String reason);
 

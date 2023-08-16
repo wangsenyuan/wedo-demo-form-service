@@ -30,6 +30,7 @@ public class FeeEntity {
 
     private String updatedBy;
     private String typeName;
+    private String processKey;
 
     public Long getId() {
         return id;
@@ -117,5 +118,13 @@ public class FeeEntity {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public void setProcessKey(String processKey) {
+        this.processKey = processKey;
+    }
+
+    public String getProcessKey() {
+        return processKey;
     }
 }

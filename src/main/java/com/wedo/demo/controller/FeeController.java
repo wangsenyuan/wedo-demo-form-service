@@ -25,14 +25,26 @@ public class FeeController {
     @PostMapping("/save")
     public R<FeeDto> save(@RequestBody FeeDto dto) {
         FeeDto res = feeService.factory(FeeContext.current(), dto.getId(), builder -> {
-            builder.setAmount(dto.getAmount());
-            builder.setDeparture(dto.getDeparture());
-            builder.setDestination(dto.getDestination());
-            builder.setLocation(dto.getLocation());
-            builder.setReason(dto.getReason());
-            builder.setType(dto.getType());
-            builder.setOccurredAt(dto.getOccurredAt());
-            builder.setTypeName(dto.getTypeName());
+            updateValues(dto, builder);
+        }, FeeDto::new);
+        return R.success(res);
+    }
+
+    private static void updateValues(FeeDto dto, Fee.Builder builder) {
+        builder.setAmount(dto.getAmount());
+        builder.setDeparture(dto.getDeparture());
+        builder.setDestination(dto.getDestination());
+        builder.setLocation(dto.getLocation());
+        builder.setReason(dto.getReason());
+        builder.setType(dto.getType());
+        builder.setOccurredAt(dto.getOccurredAt());
+        builder.setTypeName(dto.getTypeName());
+    }
+
+    @PostMapping("/submit")
+    public R<FeeDto> submit(@RequestBody FeeDto dto) {
+        FeeDto res = feeService.submit(FeeContext.current(), dto.getId(), builder -> {
+            updateValues(dto, builder);
         }, FeeDto::new);
         return R.success(res);
     }

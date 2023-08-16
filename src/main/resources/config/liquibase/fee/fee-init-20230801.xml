@@ -34,4 +34,11 @@
                 add column type_name text;
         </sql>
     </changeSet>
+
+    <changeSet id="form-20230801-4" author="wangsenyuan">
+        <sql>
+            alter table fee_record
+                add column process_key text;
+        </sql>
+    </changeSet>
 </databaseChangeLog>

@@ -1,5 +1,9 @@
 package com.wedo.demo.domain.process;
 
+import com.wedo.demo.domain.Context;
+
+import java.util.Map;
+
 public interface Process {
     Long getId();
 
@@ -9,5 +13,13 @@ public interface Process {
 
     ProcessState getState();
 
-    String submit();
+    Map<String, String> getFieldValues();
+
+    String submit(Context context);
+
+    Long save(Context context);
+
+    interface Builder {
+        Builder addField(String field, String value);
+    }
 }

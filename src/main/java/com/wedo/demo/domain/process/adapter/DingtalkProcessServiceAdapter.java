@@ -5,8 +5,9 @@ import com.aliyun.dingtalkworkflow_1_0.Client;
 import com.aliyun.dingtalkworkflow_1_0.models.*;
 import com.aliyun.teaopenapi.models.Config;
 import com.aliyun.teautil.models.RuntimeOptions;
-import com.wedo.demo.domain.process.config.DingtalkConfiguration;
+import com.wedo.demo.config.DingtalkConfiguration;
 import com.wedo.demo.domain.process.entity.ProcessInstanceEntity;
+import com.wedo.demo.domain.process.entity.ProcessInstanceFieldValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class DingtalkProcessServiceAdapter {
@@ -47,12 +47,11 @@ public class DingtalkProcessServiceAdapter {
 
         List<StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues> values = new ArrayList<>();
 
-        for (Map.Entry<String, String> prop : entity.getFormValues().entrySet()) {
+        for (ProcessInstanceFieldValue fieldValue : entity.getFieldValues()) {
             StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues compValue = new StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues();
 
-            compValue.setName(prop.getKey());
-            compValue.setValue(prop.getValue());
-            compValue.setComponentType("TextField");
+            compValue.setName(fieldValue.getFieldName());
+            compValue.setValue(fieldValue.getFieldValue());
 
             values.add(compValue);
         }

@@ -19,4 +19,10 @@ public class FeeWorkUnit {
         repository.saveAndFlush(entity);
         return entity.getId();
     }
+
+    public void updateProcess(FeeContext context, FeeEntity entity, String processKey) {
+        entity.setProcessKey(processKey);
+        entity.setUpdatedBy(context.getOperator());
+        repository.updateProcessKey(entity.getId(), processKey);
+    }
 }

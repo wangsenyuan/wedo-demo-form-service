@@ -65,4 +65,9 @@ public class FeeImpl implements Fee {
     public Long save(FeeContext context) {
         return workUnit.save(entity, context);
     }
+
+    @Override
+    public void updateProcess(FeeContext context, String processKey) {
+        this.workUnit.updateProcess(context, this.entity, processKey);
+    }
 }
