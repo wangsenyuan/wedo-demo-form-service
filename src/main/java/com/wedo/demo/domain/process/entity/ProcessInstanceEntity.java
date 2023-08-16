@@ -11,6 +11,7 @@ import java.util.List;
 public class ProcessInstanceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private Long id;
     private String processCode;
     private String processKey;
