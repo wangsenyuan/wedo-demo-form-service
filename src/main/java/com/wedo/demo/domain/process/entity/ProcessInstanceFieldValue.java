@@ -1,6 +1,8 @@
 package com.wedo.demo.domain.process.entity;
 
 
+import com.google.common.base.MoreObjects;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -24,5 +26,10 @@ public class ProcessInstanceFieldValue {
 
     public void setFieldValue(String fieldValue) {
         this.fieldValue = fieldValue;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("fieldName", fieldName).add("fieldValue", fieldValue).toString();
     }
 }

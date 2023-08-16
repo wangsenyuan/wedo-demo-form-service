@@ -1,5 +1,6 @@
 package com.wedo.demo.domain.process.entity;
 
+import com.google.common.base.MoreObjects;
 import com.wedo.demo.domain.process.ProcessState;
 
 import javax.persistence.*;
@@ -90,5 +91,10 @@ public class ProcessInstanceEntity {
         fieldValue.setFieldName(field);
         fieldValue.setFieldValue(value);
         this.fieldValues.add(fieldValue);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("id", id).add("processCode", processCode).add("processKey", processKey).add("state", state).add("createdBy", createdBy).add("updatedBy", updatedBy).add("fieldValues", fieldValues).toString();
     }
 }

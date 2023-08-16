@@ -42,6 +42,7 @@ public class DingtalkProcessServiceAdapter {
     }
 
     public String submit(ProcessInstanceEntity entity) {
+        logger.info("submit {}", entity);
         StartProcessInstanceHeaders startProcessInstanceHeaders = new StartProcessInstanceHeaders();
         startProcessInstanceHeaders.xAcsDingtalkAccessToken = getToken();
 
