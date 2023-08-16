@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 public class ProcessInstanceFieldValue {
 
     @ManyToOne
-    @JoinColumn(name = "process_instance_id")
+    @JoinColumn(name = "process_instance_id", referencedColumnName = "id")
     private ProcessInstanceEntity processInstance;
 
     private String fieldName;
