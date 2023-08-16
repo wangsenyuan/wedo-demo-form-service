@@ -3,6 +3,7 @@ package com.wedo.demo.domain.process.adapter;
 import com.aliyun.dingtalkoauth2_1_0.models.GetAccessTokenResponse;
 import com.aliyun.dingtalkworkflow_1_0.Client;
 import com.aliyun.dingtalkworkflow_1_0.models.*;
+import com.aliyun.tea.utils.StringUtils;
 import com.aliyun.teaopenapi.models.Config;
 import com.aliyun.teautil.models.RuntimeOptions;
 import com.wedo.demo.config.DingtalkConfiguration;
@@ -49,6 +50,9 @@ public class DingtalkProcessServiceAdapter {
         List<StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues> values = new ArrayList<>();
 
         for (ProcessInstanceFieldValue fieldValue : entity.getFieldValues()) {
+            if (StringUtils.isEmpty(fieldValue)) {
+                continue;
+            }
             StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues compValue = new StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues();
 
             compValue.setName(fieldValue.getFieldName());

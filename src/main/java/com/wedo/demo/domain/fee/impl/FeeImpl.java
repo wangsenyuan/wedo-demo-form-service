@@ -62,6 +62,11 @@ public class FeeImpl implements Fee {
     }
 
     @Override
+    public String getProcessKey() {
+        return this.entity.getProcessKey();
+    }
+
+    @Override
     public Long save(FeeContext context) {
         return workUnit.save(entity, context);
     }

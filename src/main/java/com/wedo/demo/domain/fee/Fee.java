@@ -22,6 +22,8 @@ public interface Fee {
 
     String getLocation();
 
+    String getProcessKey();
+
     Long save(FeeContext context);
 
     void updateProcess(FeeContext context, String processKey);
