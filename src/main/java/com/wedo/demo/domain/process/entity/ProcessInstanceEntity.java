@@ -23,7 +23,7 @@ public class ProcessInstanceEntity {
 
     @ElementCollection(targetClass = ProcessInstanceFieldValue.class)
     @JoinTable(name = "process_instance_field_value")
-    @JoinColumn(name = "process_instance_id", referencedColumnName = "id", columnDefinition = "big_int")
+    @JoinColumn(name = "process_instance_id", referencedColumnName = "id", columnDefinition = "bigint")
     private List<ProcessInstanceFieldValue> fieldValues;
 
     public Long getId() {

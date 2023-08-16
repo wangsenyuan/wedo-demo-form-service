@@ -31,8 +31,8 @@
             create table process_instance_field_value
             (
                 id                  serial primary key,
-                process_instance_id big_int not null,
-                field_name          text    not null,
+                process_instance_id bigint not null,
+                field_name          text   not null,
                 field_value         text,
                 created_at          timestamp default now(),
                 created_by          text
