@@ -3,8 +3,6 @@ package com.wedo.demo.domain.followup.impl;
 import com.wedo.demo.domain.followup.CustomerFollowUp;
 import com.wedo.demo.domain.followup.entity.CustomerFollowUpEntity;
 
-import java.util.Date;
-
 public class CustomerFollowUpBuilder implements CustomerFollowUp.Builder {
 
     private final CustomerFollowUpEntity entity;
@@ -22,12 +20,6 @@ public class CustomerFollowUpBuilder implements CustomerFollowUp.Builder {
     @Override
     public CustomerFollowUp.Builder operator(String operator) {
         this.entity.setOperator(operator);
-        return this;
-    }
-
-    @Override
-    public CustomerFollowUp.Builder occurredAt(Date occurredAt) {
-        this.entity.setOccurredAt(occurredAt);
         return this;
     }
 

@@ -22,8 +22,6 @@ public interface CustomerFollowUp {
 
         Builder operator(String operator);
 
-        Builder occurredAt(Date occurredAt);
-
         Builder note(String note);
 
         Builder audioUrl(String audioUrl);

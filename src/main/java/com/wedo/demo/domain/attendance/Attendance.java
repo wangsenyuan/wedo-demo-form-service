@@ -18,8 +18,6 @@ public interface Attendance {
     Long save(AttendanceContext context);
 
     interface Builder {
-        Builder setOccurredAt(Date occurredAt);
-
         Builder setCustomer(String customer);
 
         Builder setLocation(String location);

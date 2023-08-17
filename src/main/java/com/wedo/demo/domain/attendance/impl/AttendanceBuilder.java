@@ -3,19 +3,11 @@ package com.wedo.demo.domain.attendance.impl;
 import com.wedo.demo.domain.attendance.Attendance;
 import com.wedo.demo.domain.attendance.entity.AttendanceEntity;
 
-import java.util.Date;
-
 public class AttendanceBuilder implements Attendance.Builder {
     private final AttendanceEntity entity;
 
     public AttendanceBuilder(AttendanceEntity entity) {
         this.entity = entity;
-    }
-
-    @Override
-    public Attendance.Builder setOccurredAt(Date occurredAt) {
-        this.entity.setOccurredAt(occurredAt);
-        return this;
     }
 
     @Override
