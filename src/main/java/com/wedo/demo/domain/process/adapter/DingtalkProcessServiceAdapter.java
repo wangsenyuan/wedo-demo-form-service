@@ -50,7 +50,7 @@ public class DingtalkProcessServiceAdapter {
         List<StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues> values = new ArrayList<>();
 
         for (ProcessInstanceFieldValue fieldValue : entity.getFieldValues()) {
-            if (StringUtils.isEmpty(fieldValue)) {
+            if (StringUtils.isEmpty(fieldValue.getFieldValue())) {
                 continue;
             }
             StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues compValue = new StartProcessInstanceRequest.StartProcessInstanceRequestFormComponentValues();
