@@ -15,7 +15,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=testdb
     restart: unless-stopped
-#  redis-db:
+  #  redis-db:
   #    image: bitnami/redis:latest
   #    network_mode: bridge
   #    restart: unless-stopped
@@ -41,6 +41,14 @@ services:
       - postgres-db
     links:
       - postgres-db
+    logging:
+      #日志驱动
+      driver: "json-file"
+      options:
+        #日志大小
+        max-size: "200m"
+        #日志数量
+        max-file: "3"
 #  wedo-front:
 #    image: wedo-demo-front:latest
 #    network_mode: bridge
