@@ -6,6 +6,8 @@ public interface Message {
 
     Long getId();
 
+    String getSessionId();
+
     String getSender();
 
     String getReceiver();

@@ -20,9 +20,10 @@ public class MessageSenderImpl implements MessageSender {
     }
 
     @Override
-    public void send(String receiver, String message) {
+    public void send(String receiver, String sessionId, String message) {
         MessageEntity entity = new MessageEntity();
         entity.setBody(message);
+        entity.setSessionId(sessionId);
         entity.setSender(sender);
         entity.setReceiver(receiver);
         this.messageConsumer.accept(entity);

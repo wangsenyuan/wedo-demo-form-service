@@ -45,14 +45,14 @@ public class ChatService {
         }
         logger.debug("get message {} from {}", message, session.getId());
         senders.computeIfPresent(session.getId(), (sid, sender) -> {
-            sendMessage(sender, message);
+            sendMessage(sender, sid, message);
             return sender;
         });
     }
 
-    private void sendMessage(MessageSender sender, String message) {
+    private void sendMessage(MessageSender sender, String sessionId, String message) {
         ChatMessage dto = gson.fromJson(message, ChatMessage.class);
-        sender.send(dto.getReceiver(), message);
+        sender.send(dto.getReceiver(), sessionId, message);
     }
 
 
@@ -67,7 +67,13 @@ public class ChatService {
             if (session == null || !session.isOpen()) {
                 return null;
             }
-            sendMessageToSession(session, message);
+
+            if (StringUtils.equals(session.getId(), message.getSessionId())) {
+                sendMessageToSession(session, message);
+            } else {
+                logger.warn("message not in the same session {}/{}", message.getSessionId(), session.getId());
+            }
+
             return session;
         });
 

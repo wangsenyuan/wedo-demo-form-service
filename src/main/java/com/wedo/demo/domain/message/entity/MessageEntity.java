@@ -15,6 +15,8 @@ public class MessageEntity implements Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")
     private Long id;
+
+    private String sessionId;
     private String sender;
     private String receiver;
 
@@ -79,6 +81,7 @@ public class MessageEntity implements Message {
         this.createdAt = createdAt;
     }
 
+
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this).add("id", id).add("sender", sender).add("receiver", receiver).add("body", body).add("state", state).add("createdAt", createdAt).toString();
@@ -95,5 +98,14 @@ public class MessageEntity implements Message {
     @Override
     public int hashCode() {
         return Objects.hash(id, sender, receiver);
+    }
+
+    @Override
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

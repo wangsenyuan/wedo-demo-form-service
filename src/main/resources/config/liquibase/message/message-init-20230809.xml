@@ -23,4 +23,11 @@
                 add column updated_at timestamp default now();
         </sql>
     </changeSet>
+
+    <changeSet id="message-20230809-3" author="wangsenyuan">
+        <sql>
+            alter table messages
+                add column session_id text;
+        </sql>
+    </changeSet>
 </databaseChangeLog>

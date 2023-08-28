@@ -53,7 +53,7 @@ public class ChatRobot {
             try {
                 ChatMessage res = askAi(dto);
 
-                replyMessage(message.getSender(), res);
+                replyMessage(message.getSender(), message.getSessionId(), res);
             } catch (Exception ex) {
                 logger.warn("exception happend for message {}", message.getId(), ex);
             }
@@ -86,8 +86,8 @@ public class ChatRobot {
         }
     }
 
-    private void replyMessage(String receiver, ChatMessage dto) {
+    private void replyMessage(String receiver, String sessionId, ChatMessage dto) {
         String body = gson.toJson(dto);
-        messageSender.send(receiver, body);
+        messageSender.send(receiver, sessionId, body);
     }
 }
