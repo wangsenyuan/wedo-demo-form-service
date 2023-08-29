@@ -94,6 +94,10 @@ public class ChatService {
             } else {
                 dto = nullMessage(message.getSender());
             }
+            if (dto.getPayload() == null) {
+                logger.warn("no valid payload got {}", message.getBody());
+                return;
+            }
             session.sendMessage(new TextMessage(gson.toJson(dto)));
         } catch (Exception e) {
             logger.warn("failed to send message {} to {}", message.getId(), session.getId(), e);
